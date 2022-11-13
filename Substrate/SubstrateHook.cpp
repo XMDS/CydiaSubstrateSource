@@ -584,6 +584,9 @@ printf("SubstrateHookFunctionARM\n");
 
     if (backup[0] == A$ldr_rd_$rn_im$(A$pc, A$pc, 4 - 8)) {
         *result = reinterpret_cast<void *>(backup[1]);
+        //xmds fix
+        SubstrateHookMemory code(process, symbol, used);
+        arm[1] = reinterpret_cast<uint32_t>(replace);
         
 		return sizeof(backup[0]);
     }
